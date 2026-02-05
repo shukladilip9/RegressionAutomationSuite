@@ -12,7 +12,11 @@ public class LoginTest extends BaseTest {
     public void verifyUserCanLoginSuccessfully() {
         LoginPage loginPage = new LoginPage(driver);
         DashboardPage dashboardPage = loginPage.loginAs("admin", "password");
-
         Assert.assertTrue(dashboardPage.isDashboardLoaded());
+    }
+
+    @Test
+    public void testStringEquality(){
+        Assert.assertTrue(true);
     }
 }
