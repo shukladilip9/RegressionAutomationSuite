@@ -1,4 +1,6 @@
 name: Regression Suite
+permissions:
+  contents: write
 
 on:
   push:
