@@ -6,7 +6,18 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '30 20 * * *'   # 2:00 AM IST (8:30 PM UTC)
+    - cron: '30 20 * * *'   # 2:00 AM IST
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Select Test Suite"
+        required: true
+        default: regression
+        type: choice
+        options:
+          - smoke
+          - regression
+          - sanity
 
 permissions:
   pages: write
@@ -31,8 +42,17 @@ jobs:
       - name: Build project
         run: mvn -B clean install -DskipTests
 
-      - name: Run TestNG Tests
-        run: mvn test
+      - name: Decide Suite File
+        id: suitefile
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "suitefile=testng-${{ github.event.inputs.suite }}.xml" >> $GITHUB_OUTPUT
+          else
+            echo "suitefile=testng-regression.xml" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run TestNG Suite
+        run: mvn test -Dsurefire.suiteXmlFiles=${{ steps.suitefile.outputs.suitefile }}
 
       - name: Upload Test Reports (artifact)
         if: always()
