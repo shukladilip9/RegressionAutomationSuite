@@ -5,6 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: '30 20 * * *'   # 2:00 AM IST (8:30 PM UTC)
 
 permissions:
   pages: write
