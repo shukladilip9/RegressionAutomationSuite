@@ -1,6 +1,8 @@
 name: Regression Suite
 permissions:
-  contents: write
+  pages: write
+  id-token: write
+  contents: read
 
 on:
   push:
@@ -41,10 +43,16 @@ jobs:
 
       - name: Prepare Pages content
         run: |
-              cp target/site/surefire-report.html target/site/index.html
+          cp target/site/surefire-report/index.html target/site/index.html
 
-      - name: Deploy report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: target/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/site
