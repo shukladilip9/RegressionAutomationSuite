@@ -3,7 +3,6 @@ permissions:
   pages: write
   id-token: write
   contents: read
-
 on:
   push:
     branches: [ "main" ]
@@ -37,13 +36,23 @@ jobs:
         with:
           name: Test-Reports
           path: target/surefire-reports/
-
-      - name: Generate HTML Test Report
-        run: mvn surefire-report:report
-
       - name: Prepare Pages content
         run: |
-          cp target/site/surefire-report/index.html target/site/index.html
+          mkdir -p public
+          cp -r target/surefire-reports/* public/
+          cp target/surefire-reports/index.html public/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
