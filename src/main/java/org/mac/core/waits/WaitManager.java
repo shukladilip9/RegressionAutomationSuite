@@ -1,10 +1,7 @@
 package org.mac.core.waits;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
@@ -12,8 +9,8 @@ public class WaitManager {
 
     private WebDriverWait wait;
 
-    public WaitManager(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public WaitManager(WebDriver driver, int timeoutSeconds) {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
     }
 
     public WebElement waitForVisible(By locator) {
@@ -22,5 +19,13 @@ public class WaitManager {
 
     public WebElement waitForClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public boolean waitForInvisible(By locator) {
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    public WebElement waitForPresence(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 }

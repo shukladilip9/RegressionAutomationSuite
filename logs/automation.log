@@ -1,0 +1,6 @@
+2026-02-07 23:49:56 INFO  LoginPage - LoginPage initialized
+2026-02-07 23:49:56 INFO  LoginPage - Attempting login for user: Admin
+2026-02-07 23:49:56 INFO  LoginPage - Entering username: Admin
+2026-02-07 23:49:57 INFO  LoginPage - Entering password
+2026-02-07 23:49:57 INFO  LoginPage - Clicking Login button
+2026-02-07 23:49:57 INFO  LoginPage - Login action submitted for user: Admin

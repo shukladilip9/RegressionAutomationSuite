@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class DashboardPage extends BasePage {
 
-    private final By labelDashboardHeader = By.id("dashboardHeader");
+    private final By labelDashboardHeader = By.xpath("//h6[text()='Dashboard']");
     public final HeaderComponent header;
 
     public DashboardPage(WebDriver driver) {
@@ -16,6 +16,6 @@ public class DashboardPage extends BasePage {
     }
 
     public boolean isDashboardLoaded() {
-        return isElementDisplayed(labelDashboardHeader);
+        return isDisplayed(labelDashboardHeader);  // FIXED
     }
 }

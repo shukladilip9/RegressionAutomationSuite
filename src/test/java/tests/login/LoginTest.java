@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void verifyUserCanLoginSuccessfully() {
         LoginPage loginPage = new LoginPage(driver);
-        DashboardPage dashboardPage = loginPage.loginAs("admin", "password");
+        DashboardPage dashboardPage = loginPage.loginAs("Admin", "admin123");
         Assert.assertTrue(dashboardPage.isDashboardLoaded());
     }
 
