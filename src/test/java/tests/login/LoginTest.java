@@ -1,6 +1,7 @@
 package tests.login;
 
 import org.mac.base.BaseTest;
+import org.mac.core.driver.DriverManager;
 import org.mac.pages.DashboardPage;
 import org.mac.pages.LoginPage;
 import org.testng.Assert;
@@ -10,9 +11,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyUserCanLoginSuccessfully() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         DashboardPage dashboardPage = loginPage.loginAs("Admin", "admin123");
-        Assert.assertTrue(dashboardPage.isDashboardLoaded());
+        Assert.fail();
+        //Assert.assertTrue(dashboardPage.isDashboardLoaded());
     }
 
     @Test

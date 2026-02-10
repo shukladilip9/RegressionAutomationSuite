@@ -15,7 +15,5 @@ public class DashboardPage extends BasePage {
         header = new HeaderComponent(driver);
     }
 
-    public boolean isDashboardLoaded() {
-        return isDisplayed(labelDashboardHeader);  // FIXED
-    }
+
 }

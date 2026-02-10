@@ -22,8 +22,11 @@ public class ConfigManager {
         } catch (IOException e) {
             throw new RuntimeException("Failed to load config.properties", e);
         }
+        System.out.println("CONFIG LOADED");
+        System.out.println("Browser from config = " + getBrowser());
     }
 
+    // 🌍 Common
     public static String getBaseUrl() {
         return properties.getProperty("base.url");
     }
@@ -32,11 +35,28 @@ public class ConfigManager {
         return properties.getProperty("browser", "chrome");
     }
 
+    public static boolean isHeadless() {
+        return Boolean.parseBoolean(properties.getProperty("headless", "false"));
+    }
+
     public static int getTimeout() {
         return Integer.parseInt(properties.getProperty("timeout", "10"));
     }
 
-    public static boolean isHeadless() {
-        return Boolean.parseBoolean(properties.getProperty("headless", "false"));
+    // ☁️ BrowserStack Specific
+    public static String getBsBrowser() {
+        return properties.getProperty("bs.browser", "Chrome");
+    }
+
+    public static String getBsBrowserVersion() {
+        return properties.getProperty("bs.browser.version", "latest");
+    }
+
+    public static String getBsOS() {
+        return properties.getProperty("bs.os", "Windows");
+    }
+
+    public static String getBsOSVersion() {
+        return properties.getProperty("bs.os.version", "11");
     }
 }
